@@ -5,7 +5,19 @@ body {
   margin: 0;
   padding: 0;
 }
+
+h1 {
+  color: #525454;
+  font-size: 22px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.options-box {
+  padding-top: 10px;
+}
+
 #map {
   height: 100%;
-  display: flex;  
+  display: flex;
 }

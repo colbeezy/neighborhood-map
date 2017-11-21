@@ -10,10 +10,15 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div id="map"></div>        
-
+    <div class="container">
+        <div class="options-box">
+          <h1>Visit Your Grandparents in Boca!</h1>
+        </div>
+    </div>
+    <div id="map"></div>
     <script src="js/lib/knockout-3.4.2.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/locations.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlBCo1Z4jeKvBK21f3RgeCJEv9Le5GcME&v=3&callback=startApp"
         onerror="mapsError()">
