@@ -41,6 +41,11 @@ function ViewModel() {
           markers.push(marker);
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
+            // If a marker is selected, deselect it.
+            if (self.currentMarker) {
+              self.currentMarker.setIcon(defaultIcon);
+            }
+            self.currentMarker = this;
             populateInfoWindow(this, largeInfowindow);
             this.setIcon(selectedIcon);
           });
