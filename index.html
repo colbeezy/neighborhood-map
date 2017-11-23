@@ -13,6 +13,10 @@
     <div class="container">
         <div class="options-box">
           <h1>Visit Your Grandparents in Boca!</h1>
+          <input class="search" data-bind="textInput: searchQuery, valueUpdate: 'afterkeydown'" placeholder="Search Hottest Spots">
+          <ul class="location-list" data-bind="foreach: filteredLocations">
+            <a href="#"><li class="location_item" data-bind="text: title, click: $parent.selectMarker"></li></a>
+        </ul>          
         </div>
     </div>
     <div id="map"></div>
