@@ -5,10 +5,13 @@ function ViewModel() {
 
     var self = this;
 
+    var markers = [];    
+
     // Style the default and selected icons
     var defaultIcon = makeMarkerIcon('8bf08b');   
     var selectedIcon = makeMarkerIcon('001');
-    var markers = [];
+
+    // Create a KO observable for user's search input
     this.searchQuery = ko.observable("");
     
     // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -18,7 +21,41 @@ function ViewModel() {
       // Check to make sure the infowindow is not already opened on this marker.
       if (infowindow.marker != marker) {
         infowindow.marker = marker;
-        infowindow.setContent('<div>' + marker.title + '</div>');
+    
+      // Construct the URL to hit Foursquare's API
+      var foursquareClientID = "XTWWDRVZQ00ZEIOPQVZJO55E31ZJYY1XUEYOFEYPOWO3KCKF";
+      var foursquareClientSecret = "UCE1NVC5KCYGOUURVMUNLWLIQRMIYAKHXCGJY5RIDRTZH3VS";
+      var foursquareVersion = "20171124"
+      var foursquareApiUrl = "https://api.foursquare.com/v2/venues/search?client_id=" +
+          foursquareClientID + "&client_secret=" + foursquareClientSecret + 
+          "&v=" + foursquareVersion + "&ll=" + marker.lat + "," + marker.lng;
+
+      // JQUERY to grab a few fields, store them, and write HTML
+      $.getJSON(foursquareApiUrl, function(marker) {
+        var response = marker.response.venues[0];
+        var street = response.location.formattedAddress[0];
+        var city = response.location.formattedAddress[1];
+        var category = response.categories[0].name;
+
+        var foursquareHTML =
+            '<h5>' + category + '</h5>' + '<div>' +
+            '<h6> Address: </h6>' +
+            '<p>' + street + '</p>' +
+            '<p>' + city + '</p>';
+
+        // Merge the HTML of the hardcoded data and foursquare data
+        infowindow.setContent(titleHTML + foursquareHTML);
+
+      }).fail(function() {
+          // If Foursquare call fails to load, show the following error alert
+          alert(
+            'Dang it all to heck! Foursquare failed to load. Please refresh to try again.'
+          );
+      });
+
+        // HTML for the hardcoded data
+        var titleHTML = '<div>' + '<h4>' + marker.title + '</h4>';  
+
         infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick',function(){
@@ -54,12 +91,18 @@ function ViewModel() {
         // The following group uses the location array to create an array of markers on initialize.
         for (var i = 0; i < locations.length; i++) {
           // Get the position from the location array.
-          var position = locations[i].location;
+          var lat = locations[i].lat;
+          var lng = locations[i].lng;
           var title = locations[i].title;
           // Create a marker per location, and put into markers array.
           var marker = new google.maps.Marker({
             map: map,
-            position: position,
+            position: {
+              lat: lat,
+              lng: lng
+            },
+            lat: lat,
+            lng: lng,
             title: title,
             animation: google.maps.Animation.DROP,
             icon: defaultIcon,
@@ -94,6 +137,7 @@ function ViewModel() {
 
     this.initMap();    
 
+    // If search query matches a location title, display it in list and map.
     this.filteredLocations = ko.computed(function() {
       var results = [];
       for (var i = 0; i < markers.length; i++) {
