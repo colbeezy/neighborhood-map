@@ -25,7 +25,7 @@ function ViewModel() {
       // Construct the URL to hit Foursquare's API
       var foursquareClientID = "XTWWDRVZQ00ZEIOPQVZJO55E31ZJYY1XUEYOFEYPOWO3KCKF";
       var foursquareClientSecret = "UCE1NVC5KCYGOUURVMUNLWLIQRMIYAKHXCGJY5RIDRTZH3VS";
-      var foursquareVersion = "20171124"
+      var foursquareVersion = "20171124";
       var foursquareApiUrl = "https://api.foursquare.com/v2/venues/search?client_id=" +
           foursquareClientID + "&client_secret=" + foursquareClientSecret + 
           "&v=" + foursquareVersion + "&ll=" + marker.lat + "," + marker.lng;
@@ -65,7 +65,7 @@ function ViewModel() {
           marker.setIcon(defaultIcon);            
         });
       }
-    }
+    };
     
     this.selectMarker = function() {
       // If a marker is selected, deselect it.
@@ -119,7 +119,7 @@ function ViewModel() {
         
         // Extend the boundaries of the map for each marker
         map.fitBounds(bounds);
-      }
+      };
 
       
 
