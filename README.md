@@ -16,12 +16,6 @@ It offers a filterable map and list view of some of the hottest spots for old pe
 2. Open index.html in your favorite browser
 3. Get jiggy with it
 
-## Running the Program
-
-1. Create the database with 'python database_setup.py'
-2. Populate the database with sample data with 'python sample_db.py' (OPTIONAL)
-3. Execute the program with `python application.py`
-
 ## The Live Version
 Check it out [here] (https://colbeezy.github.io/neighborhood-map/)
 
