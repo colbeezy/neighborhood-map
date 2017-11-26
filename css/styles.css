@@ -1,42 +1,95 @@
-html,
-body {
-  font-family: Arial, sans-serif;
+html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  padding-left: 2px;
 }
 
-.container {
+.row {
   height: 100%;
-  position: relative;
 }
 
-input {
-  font-size: 12px;
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+  line-height: 40px;  
+}
+
+.sidebar-header {
+  text-align: center;
+  padding: 0 10px 10px 10px;
 }
 
 h1 {
-  color: #525454;
-  font-size: 22px;
-  margin: 0 0 10px 0;
-  text-align: center;
+  font-size: 2em !important;
+}
+
+li, .attribution {
+  margin-left: 10px;
+}
+
+.search-container {
+  text-align: center !important;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+a {
+  color: #64b764 !important;
+}
+
+.attribution {
+  padding-top: 50px;
+  line-height: 25px;
+  font-weight: lighter;
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    height: 40%;
+  }
+}
+
+/*
+ * Map
+ */
+
+.col-md-8 {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+} 
+
+.main {
+  height: 100%;
 }
 
 #map {
-  bottom:0px;
   height: 100%;
-  left: 362px;
-  position: absolute;
-  right: 0px;
 }
 
-.options-box {
-  background: #fff;
-  border: 1px solid #999;
-  border-radius: 3px;
-  height: 100%;
-  line-height: 35px;
-  padding: 10px 10px 30px 10px;
-  text-align: left;
-  width: 340px;
+@media (max-width: 768px) {
+  .col-md-8 {
+    height: 60% !important;
+  }
+  
+  .main {
+    padding-right: 40px !important;
+    padding-left: 40px !important;
+    height: 100%;
+  }
+
+  #map {
+    height: 100%;
+  }
 }
+

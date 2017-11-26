@@ -8,7 +8,7 @@ function ViewModel() {
     var markers = [];    
 
     // Style the default and selected icons
-    var defaultIcon = makeMarkerIcon('8bf08b');   
+    var defaultIcon = makeMarkerIcon('64b764');   
     var selectedIcon = makeMarkerIcon('001');
 
     // Create a KO observable for user's search input
@@ -36,10 +36,12 @@ function ViewModel() {
         var street = response.location.formattedAddress[0];
         var city = response.location.formattedAddress[1];
         var category = response.categories[0].name;
+        var checkinsCount = Number(response.stats.checkinsCount).toLocaleString('en');
 
         var foursquareHTML =
-            '<h5>' + category + '</h5>' + '<div>' +
-            '<h6> Address: </h6>' +
+            '<p>' + category + '</p>' + '<div>' +
+            '<h5> Foursquare check-ins: </h5>' + checkinsCount + '</p>' +         
+            '<h5> Address: </h5>' +
             '<p>' + street + '</p>' +
             '<p>' + city + '</p>';
 
